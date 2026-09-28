@@ -1,0 +1,545 @@
+* {
+  box-sizing: border-box;
+}
+
+.fraud-page {
+  min-height: 100vh;
+  display: flex;
+  background: #f4f7fb;
+  color: #101828;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ================= SIDEBAR ================= */
+
+.fraud-sidebar {
+  width: 270px;
+  min-height: 100vh;
+  background: #101827;
+  color: white;
+  padding: 30px 17px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.fraud-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 5px 12px 55px;
+}
+
+.logo-box {
+  width: 46px;
+  height: 46px;
+  background: #3478f6;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.fraud-logo h2 {
+  margin: 0;
+  font-size: 21px;
+  letter-spacing: 0.5px;
+}
+
+.fraud-logo span {
+  display: block;
+  margin-top: 5px;
+  font-size: 9px;
+  color: #8ea0bb;
+  letter-spacing: 1px;
+}
+
+.menu-title {
+  color: #687994;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 10px 15px 18px;
+}
+
+.side-menu {
+  height: 56px;
+  margin-bottom: 4px;
+  padding: 0 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #c8d2e2;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.side-menu:hover {
+  background: #1c2a40;
+  color: white;
+}
+
+.side-menu.active {
+  background: #2d68ed;
+  color: white;
+}
+
+.side-menu span {
+  width: 20px;
+  text-align: center;
+}
+
+.logout {
+  margin-top: 10px;
+}
+
+/* ================= MAIN ================= */
+
+.fraud-main {
+  margin-left: 270px;
+  width: calc(100% - 270px);
+  padding: 35px 48px 60px;
+}
+
+.fraud-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.fraud-header h1 {
+  margin: 0 0 8px;
+  font-size: 31px;
+}
+
+.fraud-header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 16px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  background: #3478f6;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.user-profile strong {
+  display: block;
+  font-size: 17px;
+}
+
+.user-profile small {
+  display: block;
+  margin-top: 4px;
+  color: #718096;
+}
+
+/* ================= STATS ================= */
+
+.fraud-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.fraud-stat-card {
+  background: white;
+  min-height: 145px;
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 5px 20px rgba(20, 40, 80, 0.06);
+}
+
+.stat-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+}
+
+.stat-icon.blue {
+  background: #e7f0ff;
+}
+
+.stat-icon.red {
+  background: #ffe9e9;
+}
+
+.stat-icon.green {
+  background: #e6f8ef;
+}
+
+.fraud-stat-card span {
+  display: block;
+  color: #65748b;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.4px;
+}
+
+.fraud-stat-card h3 {
+  margin: 8px 0 3px;
+  font-size: 27px;
+}
+
+.fraud-stat-card p {
+  margin: 0;
+  color: #718096;
+  font-size: 13px;
+}
+
+/* ================= ANALYSIS GRID ================= */
+
+.fraud-analysis-grid {
+  display: grid;
+  grid-template-columns: 1.55fr 0.75fr;
+  gap: 22px;
+  margin-bottom: 22px;
+}
+
+.transaction-card,
+.risk-card,
+.history-card {
+  background: white;
+  border-radius: 17px;
+  box-shadow: 0 5px 20px rgba(20, 40, 80, 0.06);
+}
+
+.transaction-card {
+  padding: 30px 27px;
+}
+
+.risk-card {
+  padding: 28px;
+  min-height: 490px;
+}
+
+.card-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.card-heading h2,
+.risk-heading h2 {
+  margin: 0 0 7px;
+  font-size: 22px;
+}
+
+.card-heading p {
+  margin: 0;
+  color: #65748b;
+}
+
+.ai-ready {
+  color: #009b5b;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* ================= FORM ================= */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #243b5a;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid #d5dfeb;
+  border-radius: 9px;
+  outline: none;
+  background: white;
+  color: #172033;
+  font-size: 14px;
+  cursor: text;
+}
+
+.form-group select {
+  cursor: pointer;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #2d68ed;
+  box-shadow: 0 0 0 3px rgba(45, 104, 237, 0.12);
+}
+
+.form-group input::placeholder {
+  color: #8a96a8;
+}
+
+.analyze-btn {
+  width: 100%;
+  height: 50px;
+  margin-top: 27px;
+  border: none;
+  border-radius: 9px;
+  background: #2d68ed;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.analyze-btn:hover {
+  background: #2058d4;
+}
+
+.analyze-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ================= RISK ================= */
+
+.risk-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.risk-heading span {
+  background: #e9f9f0;
+  color: #008c53;
+  padding: 11px 13px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.no-analysis {
+  height: 390px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.shield-icon {
+  font-size: 55px;
+  margin-bottom: 15px;
+}
+
+.no-analysis h3 {
+  font-size: 23px;
+  margin: 5px 0 12px;
+}
+
+.no-analysis p {
+  color: #687994;
+  line-height: 1.7;
+}
+
+/* ================= RESULT ================= */
+
+.analysis-result {
+  height: 390px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.result-icon {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #e7f8ef;
+  color: #00a15d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.analysis-result h3 {
+  font-size: 25px;
+  margin: 5px 0 20px;
+}
+
+.risk-score {
+  width: 220px;
+  padding: 15px;
+  background: #f5f8fc;
+  border-radius: 10px;
+}
+
+.risk-score span {
+  display: block;
+  color: #718096;
+  font-size: 13px;
+}
+
+.risk-score strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 25px;
+}
+
+.risk-level {
+  margin-top: 17px;
+  color: #65748b;
+}
+
+.risk-level strong {
+  margin-left: 6px;
+  color: #2d68ed;
+}
+
+.analysis-result p {
+  color: #718096;
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+/* ================= HISTORY ================= */
+
+.history-card {
+  padding: 30px 27px;
+}
+
+.empty-history {
+  background: #f7f9fc;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  color: #6d7b91;
+}
+
+.transaction-table {
+  width: 100%;
+}
+
+.table-header,
+.table-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.3fr 0.8fr 0.8fr;
+  gap: 15px;
+  align-items: center;
+  padding: 16px;
+}
+
+.table-header {
+  background: #f6f8fb;
+  color: #66758d;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.table-row {
+  border-bottom: 1px solid #edf0f5;
+  font-size: 14px;
+}
+
+.status-safe {
+  color: #009b5b;
+  font-weight: bold;
+}
+
+.status-fraud {
+  color: #e53935;
+  font-weight: bold;
+}
+
+.status-review {
+  color: #d88900;
+  font-weight: bold;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1000px) {
+  .fraud-sidebar {
+    width: 220px;
+  }
+
+  .fraud-main {
+    margin-left: 220px;
+    width: calc(100% - 220px);
+    padding: 25px;
+  }
+
+  .fraud-analysis-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fraud-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .fraud-sidebar {
+    position: static;
+    width: 100%;
+    min-height: auto;
+  }
+
+  .fraud-page {
+    display: block;
+  }
+
+  .fraud-main {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .fraud-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
