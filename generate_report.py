@@ -17,6 +17,9 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 # -------------------------------------------------------------
 COLLEGE_NAME = "Swami Keshvanand Institute of Technology, Management & Gramothan, Jaipur"
 DEPARTMENT_NAME = "Department of Computer Science & Engineering"
+AUTHOR_ALIASES = {
+    "nisazinat8-cell": "Zinat Nisa",
+}
 # -------------------------------------------------------------
 
 def get_repo_info():
