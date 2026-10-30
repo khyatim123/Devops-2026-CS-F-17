@@ -25,7 +25,7 @@ pipeline {
                 script {
                     env.REPORT_BUILD_STATUS = 'SUCCESS'
                 }
-                bat 'python generate_report.py'
+                bat 'python generate_report.py weekly'
             }
         }
     }
@@ -37,12 +37,12 @@ pipeline {
                     currentBuild.currentResult ?: 'UNKNOWN'
             }
 
-            // Generate the final report with the actual pipeline result.
-            bat 'python generate_report.py'
+            // Generate the report with the actual pipeline result.
+            bat 'python generate_report.py weekly'
 
             // Keep a copy in the Jenkins build as well.
             archiveArtifacts(
-                artifacts: 'reports/*.md',
+                artifacts: '*.pdf',
                 allowEmptyArchive: true
             )
 
@@ -56,7 +56,7 @@ pipeline {
                     bat '''
                         git config user.name "Jenkins"
                         git config user.email "jenkins@example.com"
-                        git add reports/
+                        git add *.pdf
                         git diff --cached --quiet || git commit -m "Generate weekly progress report"
                         git push origin HEAD:main
                     '''

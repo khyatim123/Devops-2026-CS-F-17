@@ -1,3 +1,26 @@
-node_modules/ 
-dist/ 
-.env 
+# Dependencies
+node_modules/
+.venv/
+venv/
+env/
+
+# Build and distribution
+dist/
+build/
+*.egg-info/
+
+# Python cache and byte-code
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment and secrets
+.env
+.env.local
+*.log
+
+# Operating system / IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

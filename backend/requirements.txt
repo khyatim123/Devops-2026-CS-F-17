@@ -1,5 +1,8 @@
 opencv-python>=4.8
 mediapipe>=0.10
 numpy>=1.24
+matplotlib>=3.7
+reportlab>=4.0
 fastapi
 uvicorn[standard]
+prometheus-client>=0.20
