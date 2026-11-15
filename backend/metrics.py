@@ -8,6 +8,7 @@ reflects live detector state.
 
 import sys
 import os
+import time
 import threading
 
 try:
@@ -83,6 +84,22 @@ DETECTOR_RUNNING = Gauge(
 DETECTOR_RESTARTS = Counter(
     "spectra_detector_restarts_total",
     "Number of times the detector thread has been (re)started",
+)
+ALERT_EVENTS = Counter(
+    "spectra_alerts_total",
+    "Number of drowsiness alerts triggered",
+)
+PERCLOS_VALUE = Gauge(
+    "spectra_perclos_ratio",
+    "PERCLOS: fraction of the last 60 s with eyes closed (0-1)",
+)
+MAR_VALUE = Gauge(
+    "spectra_mar_value",
+    "Current Mouth Aspect Ratio (MAR); NaN when no face is detected",
+)
+YAWN_COUNT = Gauge(
+    "spectra_yawns_total",
+    "Yawns detected since the detector was last started",
 )
 ALERT_ACTIVE = Gauge(
     "spectra_alert_active",
@@ -202,6 +219,11 @@ def update_detector_metrics(status: dict) -> None:
     EAR_VALUE.set(ear if ear is not None else float("nan"))
 
     EYE_CLOSURE_DURATION.set(status.get("closure_duration", 0.0))
+
+    PERCLOS_VALUE.set(status.get("perclos") or 0.0)
+    mar = status.get("mar")
+    MAR_VALUE.set(mar if mar is not None else float("nan"))
+    YAWN_COUNT.set(status.get("yawn_count", 0))
 
     # Count live detector threads
     detector_threads = sum(
