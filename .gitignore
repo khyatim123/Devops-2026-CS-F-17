@@ -24,3 +24,7 @@ __pycache__/
 Thumbs.db
 .vscode/
 .idea/
+
+# All Python virtual environments
+.venv*/
+venv*/
