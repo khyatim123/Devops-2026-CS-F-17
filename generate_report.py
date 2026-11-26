@@ -104,6 +104,36 @@ def get_repo_info():
     return root, repo_name, branch, remote
 
 
+def fetch_repository_updates():
+    """Refresh origin refs before collecting repository-wide history."""
+
+    remote = run_git(
+        ["remote", "get-url", "origin"],
+        check=False
+    ).stdout.strip()
+
+    if not remote:
+        print(
+            "[WARNING] No origin remote configured; "
+            "using locally available commit history.",
+            file=sys.stderr
+        )
+        return
+
+    fetch_args = ["fetch", "--prune", "origin"]
+
+    shallow = run_git(
+        ["rev-parse", "--is-shallow-repository"],
+        check=False
+    ).stdout.strip()
+
+    if shallow == "true":
+        fetch_args.insert(1, "--unshallow")
+
+    run_git(fetch_args)
+    print("[INFO] Fetched the latest commit history from origin.")
+
+
 # ============================================================
 # 3. COLLECT GIT METRICS
 # ============================================================
@@ -116,10 +146,13 @@ def collect_git_metrics(interval="monthly"):
     Supported intervals: weekly, monthly, final
     """
 
+    fetch_repository_updates()
+
     today = datetime.date.today()
 
     git_args = [
         "log",
+        "--all",
         "--no-merges",
         "--pretty=format:COMMIT%x1f%h%x1f%an%x1f%ad%x1f%s",
         "--date=short",
