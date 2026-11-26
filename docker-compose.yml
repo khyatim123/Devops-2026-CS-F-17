@@ -1,49 +1,51 @@
+
 services:
-  # ---------------------------------------------------------------
-  # Prometheus — scrapes the SPECTRA FastAPI backend every 5 s
-  # ---------------------------------------------------------------
-  prometheus:
-    image: prom/prometheus:v2.51.2
-    container_name: spectra-prometheus
-    restart: unless-stopped
-    volumes:
-      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-      - prometheus_data:/prometheus
-    command:
-      - "--config.file=/etc/prometheus/prometheus.yml"
-      - "--storage.tsdb.path=/prometheus"
-      - "--storage.tsdb.retention.time=15d"
-      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
-      - "--web.console.templates=/usr/share/prometheus/consoles"
-      - "--web.enable-lifecycle"
+  spectra-frontend:
+    build:
+      context: ./frontend/Spectra-Frontend
+    container_name: spectra-dashboard
     ports:
-      - "9090:9090"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"   # lets Prometheus reach the
-                                               # FastAPI app on the host
-
-  # ---------------------------------------------------------------
-  # Grafana — loads datasource + dashboard automatically
-  # ---------------------------------------------------------------
-  grafana:
-    image: grafana/grafana:10.4.2
-    container_name: spectra-grafana
-    restart: unless-stopped
-    depends_on:
-      - prometheus
+      - "5173:5173"
     environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=spectra123
-      - GF_USERS_ALLOW_SIGN_UP=false
-      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/dashboards/spectra_dashboard.json
-    volumes:
-      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
-      - ./monitoring/grafana/dashboards:/etc/grafana/dashboards:ro
-      - grafana_data:/var/lib/grafana
+      VITE_DRIVER_APP_URL: http://localhost:5174
+      VITE_EMAIL_APP_URL: http://localhost:5175
+      VITE_DRIVER_API_URL: http://127.0.0.1:8001
+      VITE_EMAIL_API_URL: http://127.0.0.1:8002
+    restart: unless-stopped
+
+  drowsy-frontend:
+    build:
+      context: ./frontend/drowsy-frontend
+    container_name: spectra-driver-frontend
     ports:
-      - "3000:3000"
+      - "5174:5174"
+    environment:
+      VITE_API_URL: http://127.0.0.1:8001
+      VITE_SPECTRA_URL: http://localhost:5173
+    restart: unless-stopped
 
-volumes:
-  prometheus_data:
-  grafana_data:
+  email-frontend:
+    build:
+      context: ./frontend/mail_detection-frontend
+    container_name: spectra-email-frontend
+    ports:
+      - "5175:5175"
+    environment:
+      VITE_SPECTRA_URL: http://localhost:5173
+    restart: unless-stopped
 
+  email-backend:
+    build:
+      context: ./backend/mail_detection-backend
+    container_name: spectra-email-backend
+    ports:
+      - "8002:8002"
+    restart: unless-stopped
+
+  drowsy-backend:
+    build:
+      context: ./backend/drowsy-backend
+    container_name: spectra-drowsy-backend
+    ports:
+      - "8001:8001"
+    restart: unless-stopped
